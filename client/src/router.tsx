@@ -1,31 +1,46 @@
 // In your router configuration file (e.g., App.jsx or router.jsx)
 import { createBrowserRouter } from "react-router-dom";
-import Agents from "./Agents";
-import Agent from "./Agent"; // We'll create this component
-import Layout from "./Layout";
-import Chat from "./Chat";
+import TradingTerminal from "~/terminal/trading-terminal";
+
+import Agent from "./Agent";
 import Character from "./Character";
+import Chat from "./Chat";
+import Layout from "./Layout";
+import WalletPage from "./pages/WalletPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Agents />,
-    },
-    {
-        path: "/:agentId",
         element: <Layout />,
         children: [
             {
-                path: "", // This matches /:agentId exactly
-                element: <Agent />,
+                path: "",
+                element: <WalletPage />,
             },
             {
-                path: "chat", // This matches /:agentId/chat
+                path: "terminal",
+                element: <TradingTerminal />,
+            },
+            {
+                path: "wallet/chat",
                 element: <Chat />,
             },
             {
-                path: "character", // This matches /:agentId/chat
-                element: <Character />,
+                path: ":agentId",
+                children: [
+                    {
+                        path: "",
+                        element: <Agent />,
+                    },
+                    {
+                        path: "chat",
+                        element: <Chat />,
+                    },
+                    {
+                        path: "character",
+                        element: <Character />,
+                    },
+                ],
             },
         ],
     },

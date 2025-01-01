@@ -1,5 +1,14 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-import { useParams } from "react-router-dom";
+import type { LucideIcon } from "lucide-react";
+import {
+    Calendar,
+    Inbox,
+    LineChart,
+    Wallet,
+} from "lucide-react";
+import {
+    Link,
+    useParams,
+} from "react-router-dom";
 
 import {
     Sidebar,
@@ -10,25 +19,40 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "./ui/sidebar";
 
-// Menu items.
-const items = [
-    {
-        title: "Chat",
-        url: "chat",
-        icon: Inbox,
-    },
-    {
-        title: "Character Overview",
-        url: "character",
-        icon: Calendar,
-    },
-];
+interface MenuItem {
+    title: string;
+    url: string;
+    icon: LucideIcon;
+}
+
 
 export function AppSidebar() {
-    const { agentId } = useParams();
+    const { agentId } = useParams<{ agentId: string }>();
+
+    const items: MenuItem[] = [
+        {
+            title: "Chat",
+            url: agentId ? `/${agentId}/chat` : '/chat',
+            icon: Inbox,
+        },
+        {
+            title: "Character Overview",
+            url: agentId ? `/${agentId}/character` : '/character',
+            icon: Calendar,
+        },
+        {
+            title: "Wallet",
+            url: "/wallet",
+            icon: Wallet,
+        },
+        {
+            title: "Trading Terminal",
+            url: "/terminal",
+            icon: LineChart,
+        },
+    ];
 
     return (
         <Sidebar>
@@ -40,10 +64,10 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={`/${agentId}/${item.url}`}>
+                                        <Link to={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}

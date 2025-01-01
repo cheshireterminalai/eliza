@@ -1,24 +1,22 @@
 {
-  "name": "@elizaos/plugin-coinbase",
-  "version": "0.1.7-alpha.2",
-  "main": "dist/index.js",
-  "type": "module",
-  "types": "dist/index.d.ts",
-  "dependencies": {
-    "@elizaos/core": "workspace:*",
-    "coinbase-api": "1.0.5",
-    "coinbase-advanced-sdk": "file:../../packages/plugin-coinbase/advanced-sdk-ts",
-    "jsonwebtoken": "^9.0.2",
-    "@types/jsonwebtoken": "^9.0.7",
-    "node-fetch": "^2.6.1"
-  },
-  "devDependencies": {
-    "tsup": "8.3.5",
-    "@types/node": "^20.0.0"
-  },
-  "scripts": {
-    "build": "tsup --format esm --dts",
-    "dev": "tsup --format esm --dts --watch",
-    "lint": "eslint --fix  --cache ."
-  }
+    "name": "@elizaos/plugin-coinbase",
+    "version": "0.1.7-alpha.2",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsup --format esm --dts",
+        "dev": "tsup --format esm --dts --watch",
+        "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    },
+    "dependencies": {
+        "@elizaos/core": "workspace:*",
+        "@openzeppelin/contracts": "^5.1.0",
+        "dotenv": "^16.4.5",
+        "ethers": "^6.13.4"
+    },
+    "devDependencies": {
+        "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+        "hardhat": "^2.22.17",
+        "tsup": "^8.0.2",
+        "typescript": "^5.3.3"
+    }
 }

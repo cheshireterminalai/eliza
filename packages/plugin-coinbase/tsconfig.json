@@ -1,18 +1,25 @@
 {
-    "extends": "../core/tsconfig.json",
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "dist",
-        "rootDir": ".",
-        "rootDirs": [
-            "src",
-            "advanced-sdk-ts"
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "module": "ESNext",
+        "target": "ESNext",
+        "lib": [
+            "ESNext"
         ],
-        "types": [
-            "node"
-        ]
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "declaration": true,
+        "sourceMap": true
     },
     "include": [
-        "src/**/*.ts",
-        "advanced-sdk-ts/src/**/*.ts",
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
     ]
 }
